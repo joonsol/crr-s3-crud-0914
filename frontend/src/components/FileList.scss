@@ -1,19 +1,10 @@
-/* FileList.scss */
 
-:root{
-  --link:#646cff;
-  --bg:#fff;
-  --border:#eee;
-  --text:#0f172a;
-  --muted:#64748b;
-  --ring:0 0 0 3px rgba(100,108,255,.2);
-}
 
-/* 리스트 래퍼: 카드 그리드 */
+/* 리스트 래퍼: 카드 플렉스 */
 .file-list{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;                 /* 최신 브라우저 flex-gap 지원 */
   margin: 18px 0 24px;
   padding: 0;
 }
@@ -31,6 +22,10 @@
   flex-direction: column;
   gap: 8px;
   transition: transform .12s ease, box-shadow .12s ease;
+
+  /* 그리드의 minmax(260px, 1fr)와 유사하게 */
+  flex: 1 1 260px;          /* 가능한 한 넓게, 최소 260px */
+  min-width: 260px;         /* 너무 작아지지 않도록 가드 */
 }
 .file-list > li:hover{
   transform: translateY(-2px);
@@ -77,7 +72,7 @@
   color: #fff;
   cursor: pointer;
   transition: border-color .2s, filter .15s, transform .02s, box-shadow .2s;
-  margin-left: 8px; /* a 옆 간격 (네 코드에 inline style 있었던 것 반영) */
+  margin-left: 8px;
 }
 .file-list button:hover{
   filter: brightness(.95);
@@ -86,9 +81,10 @@
 .file-list button:active{ transform: translateY(1px); }
 .file-list button:focus-visible{ outline: none; box-shadow: var(--ring); }
 
-/* 작은 화면에서는 단일 열로 */
+/* 작은 화면에서는 단일 열 */
 @media (max-width: 640px){
-  .file-list{
-    grid-template-columns: 1fr;
+  .file-list > li{
+    flex-basis: 100%;
+    min-width: 0;
   }
 }
