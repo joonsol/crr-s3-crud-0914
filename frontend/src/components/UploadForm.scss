@@ -1,7 +1,7 @@
 .form-list{
-  /* 배치 & 컨테이너 */
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr auto; /* 파일, 제목, 설명, 버튼 */
+  /* 컨테이너 */
+  display: flex;
+  // flex-wrap: wrap;
   gap: 12px;
   align-items: center;
   font-size: 16px;
@@ -11,8 +11,20 @@
   border-radius: 12px;
   background: var(--bg, #fff);
 
+  /* 각 필드 기본 폭: 세 칸은 유연, 버튼은 내용만 */
+  > input[type="file"],
+  > input[type="text"]{
+    flex: 1 1 240px;     /* 최소 240px, 남는 공간 채움 */
+    min-width: 200px;
+  }
+  > button{
+    flex: 0 0 auto;      /* 버튼은 내용만큼 */
+  }
+
+  /* 모바일: 세로 스택 */
   @media (max-width: 768px){
-    grid-template-columns: 1fr; /* 모바일에서는 세로 스택 */
+    > *{ flex: 1 1 100%; }
+    > button{ width: 100%; }
   }
 
   /* 텍스트 인풋 공통 */
@@ -29,14 +41,14 @@
     &:focus{ border-color: var(--link, #646cff); box-shadow: var(--ring, 0 0 0 3px rgba(100,108,255,.2)); }
   }
 
-  /* 파일 인풋 필드 자체 */
+  /* 파일 인풋 필드 */
   input[type="file"]{
     width: 100%;
     font: inherit;
     color: inherit;
   }
 
-  /* 파일 선택 버튼 스타일(최신 브라우저) */
+  /* 파일 선택 버튼(최신 브라우저) */
   input[type="file"]::file-selector-button{
     border-radius: 8px;
     border: 1px solid transparent;
@@ -51,7 +63,7 @@
     &:focus-visible{ outline: none; box-shadow: var(--ring, 0 0 0 3px rgba(100,108,255,.2)); }
   }
 
-  /* 사파리/구 WebKit 호환 */
+  /* 사파리/구 WebKit */
   input[type="file"]::-webkit-file-upload-button{
     border-radius: 8px;
     border: 1px solid transparent;
@@ -65,7 +77,7 @@
   /* 제출 버튼 */
   button{
     border-radius: 10px;
-    border: 1px solid transparent; /* hover에서 색만 바꾸려면 투명 보더로 시작 */
+    border: 1px solid transparent;
     padding: .6em 1.2em;
     font-weight: 600;
     background: var(--link, #646cff);
