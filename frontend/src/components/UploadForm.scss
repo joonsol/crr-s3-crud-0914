@@ -1,0 +1,81 @@
+.form-list{
+  /* 배치 & 컨테이너 */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto; /* 파일, 제목, 설명, 버튼 */
+  gap: 12px;
+  align-items: center;
+  font-size: 16px;
+  margin: 20px 0;
+  padding: 14px;
+  border: 1px solid var(--border, #eee);
+  border-radius: 12px;
+  background: var(--bg, #fff);
+
+  @media (max-width: 768px){
+    grid-template-columns: 1fr; /* 모바일에서는 세로 스택 */
+  }
+
+  /* 텍스트 인풋 공통 */
+  input[type="text"]{
+    width: 100%;
+    border: 1px solid var(--border, #eee);
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: transparent;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+
+    &::placeholder{ color: #94a3b8; }
+    &:focus{ border-color: var(--link, #646cff); box-shadow: var(--ring, 0 0 0 3px rgba(100,108,255,.2)); }
+  }
+
+  /* 파일 인풋 필드 자체 */
+  input[type="file"]{
+    width: 100%;
+    font: inherit;
+    color: inherit;
+  }
+
+  /* 파일 선택 버튼 스타일(최신 브라우저) */
+  input[type="file"]::file-selector-button{
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: .6em 1.2em;
+    background: var(--link, #646cff);
+    color: #fff;
+    cursor: pointer;
+    transition: filter .15s, transform .02s, box-shadow .2s;
+
+    &:hover{ filter: brightness(.95); }
+    &:active{ transform: translateY(1px); }
+    &:focus-visible{ outline: none; box-shadow: var(--ring, 0 0 0 3px rgba(100,108,255,.2)); }
+  }
+
+  /* 사파리/구 WebKit 호환 */
+  input[type="file"]::-webkit-file-upload-button{
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: .6em 1.2em;
+    background: var(--link, #646cff);
+    color: #fff;
+    cursor: pointer;
+    transition: filter .15s, transform .02s, box-shadow .2s;
+  }
+
+  /* 제출 버튼 */
+  button{
+    border-radius: 10px;
+    border: 1px solid transparent; /* hover에서 색만 바꾸려면 투명 보더로 시작 */
+    padding: .6em 1.2em;
+    font-weight: 600;
+    background: var(--link, #646cff);
+    color: #fff;
+    cursor: pointer;
+    transition: border-color .2s, filter .15s, transform .02s, box-shadow .2s;
+
+    &:hover{ filter: brightness(.95); border-color: var(--link, #646cff); }
+    &:active{ transform: translateY(1px); }
+    &:focus-visible{ outline: none; box-shadow: var(--ring, 0 0 0 3px rgba(100,108,255,.2)); }
+    &:disabled{ opacity: .6; cursor: not-allowed; }
+  }
+}

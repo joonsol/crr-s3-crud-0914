@@ -1,0 +1,57 @@
+/* styles/main.css 혹은 main.scss 최상단 */
+:root{
+  --link:#646cff;
+  --link-hover:#535bf2;
+  --text:#213547;
+  --bg:#ffffff;
+  --btn-dark:#1a1a1a;
+  --btn-light:#f9f9f9;
+  --border:#eee;
+  --ring:0 0 0 3px color-mix(in srgb, var(--link) 30%, transparent);
+}
+
+/* 선택: 다크 모드에서 토큰만 바꿔치기 */
+@media (prefers-color-scheme: dark){
+  :root{
+    --text:#f3f4f6;
+    --bg:#0b0f19;
+    --btn-dark:#111;
+    --btn-light:#1f2937;
+    --border:#1f2937;
+  }
+}
+*{margin:0; padding:0; box-sizing:border-box;}
+ul{list-style:none;}
+
+a{
+  font-weight:500;
+  color:var(--link);
+  text-decoration:none;
+  &:hover{ color:var(--link-hover); }
+}
+
+h1{ font-size:3.2em; line-height:1.1; }
+
+/* 버튼 + 파일 업로드 버튼 공통 스타일 */
+button,
+input[type="file"]::file-selector-button{
+  border-radius:8px;
+  border:1px solid transparent;        /* hover에서 색만 바꾸려면 투명 보더로 시작 */
+  padding:.6em 1.2em;
+  background:var(--bg);
+  cursor:pointer;
+  transition:border-color .25s, box-shadow .2s;
+
+  &:hover{ border-color:var(--link); }
+  &:focus-visible{ outline:none; box-shadow:var(--ring); }
+}
+
+/* 구 WebKit */
+input[type="file"]::-webkit-file-upload-button{
+  border-radius:8px;
+  border:1px solid transparent;
+  padding:.6em 1.2em;
+  background:var(--bg);
+  cursor:pointer;
+}
+

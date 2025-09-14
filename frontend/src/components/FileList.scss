@@ -1,0 +1,94 @@
+/* FileList.scss */
+
+:root{
+  --link:#646cff;
+  --bg:#fff;
+  --border:#eee;
+  --text:#0f172a;
+  --muted:#64748b;
+  --ring:0 0 0 3px rgba(100,108,255,.2);
+}
+
+/* 리스트 래퍼: 카드 그리드 */
+.file-list{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin: 18px 0 24px;
+  padding: 0;
+}
+
+/* 카드 */
+.file-list > li{
+  list-style: none;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  color: var(--text);
+  box-shadow: 0 6px 16px rgba(17,24,39,.06);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.file-list > li:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(17,24,39,.08);
+}
+
+/* 제목, 메타 */
+.file-list b{
+  font-weight: 800;
+  font-size: 15px;
+}
+.file-list .meta{
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* 썸네일(이미지) */
+.file-list img{
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  margin: 6px 0;
+  background: #0001;
+  object-fit: contain;
+}
+
+/* 액션 영역 */
+.file-list a{
+  color: var(--link);
+  font-weight: 600;
+  text-decoration: none;
+}
+.file-list a:hover{ text-decoration: underline; }
+
+/* 버튼(삭제) */
+.file-list button{
+  align-self: flex-start;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  padding: .5em .9em;
+  font-weight: 600;
+  background: var(--link);
+  color: #fff;
+  cursor: pointer;
+  transition: border-color .2s, filter .15s, transform .02s, box-shadow .2s;
+  margin-left: 8px; /* a 옆 간격 (네 코드에 inline style 있었던 것 반영) */
+}
+.file-list button:hover{
+  filter: brightness(.95);
+  border-color: var(--link);
+}
+.file-list button:active{ transform: translateY(1px); }
+.file-list button:focus-visible{ outline: none; box-shadow: var(--ring); }
+
+/* 작은 화면에서는 단일 열로 */
+@media (max-width: 640px){
+  .file-list{
+    grid-template-columns: 1fr;
+  }
+}

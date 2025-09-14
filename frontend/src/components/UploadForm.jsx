@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../api";
+import "./UploadForm.scss"
 
 export default function UploadForm({ onDone }) {
   const [file, setFile] = useState(null);
@@ -29,10 +30,10 @@ export default function UploadForm({ onDone }) {
   };
 
   return (
-    <form onSubmit={upload} style={{ display:"flex", gap:8, flexWrap:"wrap" }}>
+    <form onSubmit={upload} className="form-list">
       <input type="file" onChange={e=>setFile(e.target.files[0])} />
-      <input placeholder="title" value={title} onChange={e=>setTitle(e.target.value)} />
-      <input placeholder="description" value={desc} onChange={e=>setDesc(e.target.value)} />
+      <input type="text" placeholder="title" value={title} onChange={e=>setTitle(e.target.value)} />
+      <input type="text" placeholder="description" value={desc} onChange={e=>setDesc(e.target.value)} />
       <button type="submit">Upload</button>
     </form>
   );
